@@ -1,0 +1,21 @@
+#myCarousel.carousel.slide
+  %ol.carousel-indicators
+    - banners.each_with_index do |banner, index|
+      %li{ "data-target" => "#myCarousel", "data-slide-to" => index, "class" => (index == 0 ? "active" : nil) }
+      
+  .carousel-inner
+    - banners.each_with_index do |banner, index|
+      %div{ "class" => (index == 0 ? 'active item' : 'item') }
+        = image_tag(banner.url(:fixed))
+    
+  %a.carousel-control.left{ href: "#myCarousel", role: :button, "data-slide" => "prev" } 
+    %i.glyphicon.glyphicon-chevron-left{ "aria-hidden" => true }
+  %a.carousel-control.right{ href: "#myCarousel", role: :button, "data-slide" => "next" } 
+    %i.glyphicon.glyphicon-chevron-right{ "aria-hidden" => true }
+    
+:javascript
+  $(document).ready(function() {
+    $('.carousel').carousel({
+      interval: 5000
+    });
+  });

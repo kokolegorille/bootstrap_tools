@@ -1,0 +1,3 @@
+%ol.breadcrumb
+  - items.each do |item|
+    %li{ active: item.equal?(items.last) }= item

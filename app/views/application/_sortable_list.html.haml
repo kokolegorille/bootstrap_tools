@@ -1,0 +1,33 @@
+%ol{ id: css_id, class: "sortable list-unstyled" }
+  - collection.each do |item|
+    %li{ id: item.pseudo_id }
+      = link_block.call(item)
+
+:javascript
+  $(document).ready(function() {
+    $('##{ css_id }').sortable({
+      axis: 'y',
+      dropOnEmpty: false,
+      cursor: 'crosshair',
+      items: 'li',
+      opacity: 0.4,
+      scroll: true,
+      
+      // set a not_sortable zone, in which text is selectable. See ref.
+      // http://stackoverflow.com/questions/4070749/sortable-w-selectable-text
+      revert: true,
+      cancel: ".not_sortable",
+      
+      update: function() {
+        $.ajax({
+          type: 'post', 
+          data: $('##{ css_id }').sortable('serialize'), 
+          dataType: 'script',
+          complete: function(request){
+            $('##{ css_id }').effect('highlight');
+          },
+          url: '#{ url }' 
+        })
+      }
+    });
+  });

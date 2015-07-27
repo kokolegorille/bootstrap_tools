@@ -1,0 +1,13 @@
+%ul.nav.navbar-nav
+  - menu.each do |item|
+    - if item[:menus].present?
+      %li
+        = link_to "#", "data-toggle" => "dropdown" do
+          = item[:caption]
+          &nbsp;
+          %b.caret
+        %ul.dropdown-menu
+          = render partial: "application/menu_items", locals: { menu: item[:menus] }
+          
+    - elsif item[:path]
+      %li= link_to(item[:caption], item[:path])

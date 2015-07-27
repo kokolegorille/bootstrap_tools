@@ -1,0 +1,10 @@
+%div{ class: css_style[:button_group_class] }
+  %button{ class: css_style[:button_class], href: "#", "data-toggle" => "dropdown", title: t(:"common.manage"), rel: 'tooltip' }
+    %i.glyphicon.glyphicon-th
+    
+  %ul.dropdown-menu{ role: "menu", "aria-labelledby" => "dLabel" }
+    - links.each do |link|
+      - if link.to_s == "divider"
+        %li.divider
+      - else
+        %li= link

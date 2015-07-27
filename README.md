@@ -16,9 +16,52 @@ Or install it yourself as:
 
     $ gem install bootstrap_tools
 
+After install, include corresponding css by adding to manifest file app/assets/application.css
+
+ *= require bootstrap_tools
+
+
 ## Usage
 
-TODO: Write usage instructions here
+Here is the list of helpers methods
+
+* render_menu menu
+sample usage:
+    render_menu [
+      { caption: "Menu1", path: "" },
+      { caption: "Menu2", menus: [
+        {caption: "Sub1", menus: [
+          { caption: "SubSub1", path: "" },
+          { caption: "SubSub2", path: "" }
+        ]}
+      ]}
+    ]
+
+* render_dropdown links, options = {}
+
+* activation_bar_for user
+
+* objectmenu *args
+
+you might overwrite additional_link_for in hosting application
+
+* render_carousel(banners)
+
+pass an array of images that respond to url(:fixed)
+
+* modal
+
+call the action with remote: true
+add js response to controller
+add js template, that contains...
+
+  $('#myModal h3').html("<%= @upload %>");
+  $('.modal-body').html('<%= escape_javascript(render(partial: 'uploads/show', locals: {upload: @upload} )) %>');
+  $('#myModal').modal("show");
+
+* render_breadcrumbs(items)
+
+pass an array of links
 
 ## Contributing
 
